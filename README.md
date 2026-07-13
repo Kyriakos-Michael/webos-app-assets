@@ -11,7 +11,7 @@ npx skills add Kyriakos-Michael/webos-app-assets -g -a cursor -y
 Or install to the current project:
 
 ```bash
-npx skills add kyriakosmichael/webos-app-assets -a cursor -y
+npx skills add Kyriakos-Michael/webos-app-assets -a cursor -y
 ```
 
 ## Use
