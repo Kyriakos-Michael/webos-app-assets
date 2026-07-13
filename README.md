@@ -5,7 +5,7 @@ Agent skill for generating and packaging LG webOS TV app visual assets (icons, s
 ## Install
 
 ```bash
-npx skills add kyriakosmichael/webos-app-assets -g -a cursor -y
+npx skills add Kyriakos-Michael/webos-app-assets -g -a cursor -y
 ```
 
 Or install to the current project:
