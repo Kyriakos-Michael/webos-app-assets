@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # webOS App Assets
 
-Generate branding assets for LG webOS TV apps under `~/Business/games/<slug>/apps/lg-webos/`.
+Generate branding assets for an LG webOS TV app. In a cre-cli project they live in the webOS app root, next to `appinfo.json` (e.g. `apps/lg-webos/`).
 
 ## Required assets
 
@@ -16,12 +16,16 @@ Generate branding assets for LG webOS TV apps under `~/Business/games/<slug>/app
 | Large icon | 130×130 PNG | `largeIcon.png` | `largeIcon` |
 | Splash background | 1920×1080 PNG | `splashBackground.png` | `splashBackground` |
 | App tile color | HEX | — | `iconColor` |
+| App name | ≤ 20 characters | — | `title` |
 
 **Rules:**
 - Small and large icons must be identical except size.
 - Same `iconColor` for both icon sizes (tile background on Home screen).
+- Icons are flat and two-dimensional with a distinct silhouette: no gloss, bevel, drop shadow, or other visual effects.
+- Icon background must be opaque (no transparency), with at least 5 px padding inside the 80×80 and 130×130 canvases.
 - Splash must NOT be a black screen; minimal text (localization).
-- Seller Lounge also needs a **400×400 PNG** (`store-assets/icon-400.png`) — uploaded separately, auto-resized in store.
+- `title` is the launcher title (≤ 20 characters), not the store title. A store title like `Brand – Descriptor` usually goes over 20; use just the brand (or a short form) in `appinfo.json` and keep the full store title for Seller Lounge.
+- Seller Lounge also needs a **400×400 PNG** (`store-assets/icon-400.png`) — uploaded separately, auto-resized in store. The packaged 80/130 icons are only used for testing.
 - Paths are relative to `index.html` (e.g. `icon.png`, not `/icon.png`).
 
 ## Workflow
@@ -34,7 +38,7 @@ Task Progress:
 - [ ] Generate 1920×1080 splash from same visual language
 - [ ] Pick iconColor HEX from dominant icon background
 - [ ] Update appinfo.json (title ≤20 chars, appDescription ≤60 chars optional)
-- [ ] Place files in apps/lg-webos/
+- [ ] Place files in the webOS app root next to appinfo.json
 ```
 
 ## Icon generation prompt (copy and customize)
@@ -48,19 +52,20 @@ Subject: [ONE_SENTENCE_GAME_CONCEPT — e.g. "classic falling-block puzzle with 
 
 Style:
 - Bold, simple, readable at small sizes (80px on TV)
-- Flat or lightly shaded vector/game-art style
+- Flat, two-dimensional vector/game-art style with a distinct silhouette
+- No gloss, bevel, drop shadows, or other visual effects
 - No fine text, no UI chrome, no screenshots
-- Centered symbol on solid or subtle gradient background
+- Centered symbol on a solid, opaque background (no transparency)
 - High contrast; works on dark TV launcher tiles
 
 Colors: [LIST 3–5 HEX VALUES from the game palette]
 
 Composition:
 - Single focal graphic (character, emblem, or 2–3 iconic game pieces)
-- Safe padding ~12% on all sides (TV crops slightly)
+- Safe padding ~12% on all sides
 - Square 1:1 aspect ratio
 
-Output: 400×400 px PNG, clean edges, no transparency required.
+Output: 400×400 px PNG, clean edges, opaque background.
 ```
 
 ### Splash prompt (same session, same style)
@@ -75,7 +80,6 @@ Layout:
 - Large centered game emblem or abstract motif from the icon
 - Subtle ambient glow or soft grid; no busy detail
 - No paragraph text; optional single-word title "[GAME_NAME]" only if it stays readable
-- Leave center-bottom clear for TV overscan
 
 Output: 1920×1080 PNG.
 ```
@@ -88,14 +92,14 @@ Design a square app icon for a webOS TV game called "Spectrum Drop".
 
 Subject: classic Tetris-style falling blocks with a modern neon spectrum palette.
 
-Style: bold flat game art, readable at 80px, centered tetromino cluster, no text.
+Style: bold flat 2D game art, no visual effects, readable at 80px, centered tetromino cluster, no text.
 
 Colors: #0a0a12 background, #fa1e1e red, #f1fa1e yellow, #42c6f0 cyan, #d838cb magenta, #4bd838 green.
 
-Composition: 3–4 stacked colorful tetromino blocks forming a compact emblem, ~12% padding, 1:1, 400×400 PNG.
+Composition: 3–4 stacked colorful tetromino blocks forming a compact emblem, ~12% padding, opaque background, 1:1, 400×400 PNG.
 ```
 
-**iconColor:** `#0a0a12`
+**iconColor:** `#050509` (sampled from the generated icon's background, not copied from the prompt)
 
 ## After generation
 
@@ -113,7 +117,7 @@ Composition: 3–4 stacked colorful tetromino blocks forming a compact emblem, ~
      "icon": "icon.png",
      "largeIcon": "largeIcon.png",
      "splashBackground": "splashBackground.png",
-     "iconColor": "#0a0a12"
+     "iconColor": "#050509"
    }
    ```
 4. Verify `title` ≤ 20 characters.
